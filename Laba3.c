@@ -5,7 +5,7 @@
 
 int main()
 {
-    int sizeOfArr1, sizeOfArr2, k, * arr1, * arr2, * arrd;
+    int sizeOfArr1, sizeOfArr2, k, * arr1, * arr2, * differentElements;
     // Inputting array sizes
     printf("Input sizeOfArr1: ");
     scanf("%d", &sizeOfArr1);
@@ -16,7 +16,7 @@ int main()
     arr1 = (int*)malloc(sizeOfArr1 * sizeof(int));
     arr2 = (int*)malloc(sizeOfArr2 * sizeof(int));
     // Allocating memory for resulting array with a size of the smallest array among these two above
-    arrd = (int*)malloc((sizeOfArr1 <= sizeOfArr2 ? sizeOfArr1 : sizeOfArr2) * sizeof(int));
+    differentElements = (int*)malloc((sizeOfArr1 <= sizeOfArr2 ? sizeOfArr1 : sizeOfArr2) * sizeof(int));
     // Inputting arrays' elements
     for (int i = 0; i < sizeOfArr1; i++)
     {
@@ -30,9 +30,9 @@ int main()
     }
 
     // Calling our function, that returns the amount of elements in our resulting array
-    k = array_diff(sizeOfArr1, sizeOfArr2, arr1, arr2, arrd);
+    k = array_diff(sizeOfArr1, sizeOfArr2, arr1, arr2, differentElements);
     // Deleting memory that haven't been used
-    arrd = realloc(arrd, k*sizeof(int));
+    differentElements = realloc(differentElements, k*sizeof(int));
 
     // Printing the result
     if (k == 0)
@@ -44,13 +44,13 @@ int main()
         printf("Array, that contains elements from arr2 which are not present in arr1:\n");
         for (int i = 0; i < k; i++)
         {
-            printf("arrd[%d] = %d\n", i + 1, arrd[i]);
+            printf("differentElements[%d] = %d\n", i + 1, differentElements[i]);
         }
     }
 
     free(arr1);
     free(arr2);
-    free(arrd);
+    free(differentElements);
 }
 
 
@@ -58,7 +58,7 @@ int main()
 
 
 
-int array_diff(int sizeOfArr1, int sizeOfArr2, int* arr1, int* arr2, int* arrd)
+int array_diff(int sizeOfArr1, int sizeOfArr2, int* arr1, int* arr2, int* differentElements)
 {
     // Setting the amount of elements in resulting array to 0 
     int k = 0;
@@ -75,9 +75,9 @@ int array_diff(int sizeOfArr1, int sizeOfArr2, int* arr1, int* arr2, int* arrd)
                 int m = 0; // Counter for do while loop
                 do
                 {
-                    if (arr2[i] != arrd[m]) // If we don't have in our relusting array the number we found, we add the number to resulting array
+                    if (arr2[i] != differentElements[m]) // If we don't have in our relusting array the number we found, we add the number to resulting array
                     {
-                        arrd[k] = arr2[i];
+                        differentElements[k] = arr2[i];
                         k++;
                     }
                     m++;
