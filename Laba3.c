@@ -5,32 +5,32 @@
 
 int main()
 {
-    int n1, n2, k, * arr1, * arr2, * arrd;
+    int sizeOfArr1, sizeOfArr2, k, * arr1, * arr2, * arrd;
     // Inputting array sizes
-    printf("Input n1: ");
-    scanf("%d", &n1);
-    printf("Input n2: ");
-    scanf("%d", &n2);
+    printf("Input sizeOfArr1: ");
+    scanf("%d", &sizeOfArr1);
+    printf("Input nsizeOfArr2: ");
+    scanf("%d", &sizeOfArr2);
 
     // Allocating memory for the arrays
-    arr1 = (int*)malloc(n1 * sizeof(int));
-    arr2 = (int*)malloc(n2 * sizeof(int));
+    arr1 = (int*)malloc(sizeOfArr1 * sizeof(int));
+    arr2 = (int*)malloc(sizeOfArr2 * sizeof(int));
     // Allocating memory for resulting array with a size of the smallest array among these two above
-    arrd = (int*)malloc((n1 <= n2 ? n1 : n2) * sizeof(int));
+    arrd = (int*)malloc((sizeOfArr1 <= sizeOfArr2 ? sizeOfArr1 : sizeOfArr2) * sizeof(int));
     // Inputting arrays' elements
-    for (int i = 0; i < n1; i++)
+    for (int i = 0; i < sizeOfArr1; i++)
     {
         printf("Input arr1[%d]: ", i + 1);
         scanf("%d", &arr1[i]);
     }
-    for (int i = 0; i < n2; i++)
+    for (int i = 0; i < sizeOfArr2; i++)
     {
         printf("Input arr2[%d]: ", i + 1);
         scanf("%d", &arr2[i]);
     }
 
     // Calling our function, that returns the amount of elements in our resulting array
-    k = array_diff(n1, n2, arr1, arr2, arrd);
+    k = array_diff(sizeOfArr1, sizeOfArr2, arr1, arr2, arrd);
     // Deleting memory that haven't been used
     arrd = realloc(arrd, k*sizeof(int));
 
@@ -58,19 +58,19 @@ int main()
 
 
 
-int array_diff(int n1, int n2, int* arr1, int* arr2, int* arrd)
+int array_diff(int sizeOfArr1, int sizeOfArr2, int* arr1, int* arr2, int* arrd)
 {
     // Setting the amount of elements in resulting array to 0 
     int k = 0;
-    for (int i = 0; i < n2; i++)
+    for (int i = 0; i < sizeOfArr2; i++)
     {
-        for (int j = 0; j < n1; j++)
+        for (int j = 0; j < sizeOfArr1; j++)
         {
             if (arr2[i] == arr1[j])
             {
                 break; // If we found same number in two arrays we skip to the next element in arr2
             }
-            if (j == n1 - 1) // If we come to an end of internal loop and haven't found same number in arr1, that we have in arr2
+            if (j == sizeOfArr1 - 1) // If we come to an end of internal loop and haven't found same number in arr1, that we have in arr2
             {
                 int m = 0; // Counter for do while loop
                 do
