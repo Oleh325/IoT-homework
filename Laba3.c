@@ -11,18 +11,12 @@ int main()
     scanf("%d", &n1);
     printf("Input n2: ");
     scanf("%d", &n2);
+
     // Allocating memory for the arrays
     arr1 = (int*)malloc(n1 * sizeof(int));
     arr2 = (int*)malloc(n2 * sizeof(int));
     // Allocating memory for resulting array with a size of the smallest array among these two above
-    if (n2 <= n1)
-    {
-        arrd = (int*)malloc(n2 * sizeof(int));
-    }
-    else
-    {
-        arrd = (int*)malloc(n1 * sizeof(int));
-    }
+    arrd = (int*)malloc((n1 <= n2 ? n1 : n2) * sizeof(int));
     // Inputting arrays' elements
     for (int i = 0; i < n1; i++)
     {
@@ -34,10 +28,12 @@ int main()
         printf("Input arr2[%d]: ", i + 1);
         scanf("%d", &arr2[i]);
     }
+
     // Calling our function, that returns the amount of elements in our resulting array
     k = array_diff(n1, n2, arr1, arr2, arrd);
     // Deleting memory that haven't been used
     arrd = realloc(arrd, k*sizeof(int));
+
     // Printing the result
     if (k == 0)
     {
@@ -51,6 +47,7 @@ int main()
             printf("arrd[%d] = %d\n", i + 1, arrd[i]);
         }
     }
+
     free(arr1);
     free(arr2);
     free(arrd);
@@ -88,6 +85,7 @@ int array_diff(int n1, int n2, int* arr1, int* arr2, int* arrd)
             }
         }
     }
+
     // Returning the amount of elements in our resulting array
     return k;
 }
